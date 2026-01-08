@@ -1,15 +1,26 @@
 # Gratitude Journal Web App
 
-A simple and elegant web application for tracking daily gratitude entries, built with Node.js/Express and React.
+A warm, inviting web application for tracking daily gratitude entries. Designed to feel like a cozy, personal space for reflection rather than a corporate app.
 
 ## Features
 
-- Add daily gratitude entries
-- View past entries in a clean list format
-- Calendar view to visualize entry history
+### Core Functionality
+- Add daily gratitude entries with encouraging prompts
+- View past entries in beautiful journal-like cards
+- Interactive calendar view with heart icons for completed entries
 - Update existing entries by submitting a new entry for the same date
-- Delete entries
-- Responsive design with Tailwind CSS
+- Delete entries with gentle confirmation
+- Fully responsive design that works on all devices
+
+### Design Highlights
+- **Minimalist & Cozy**: Clean interface with warm, peachy-cream color palette
+- **Custom Typography**: Playfair Display for headings, Inter for body text
+- **Subtle Interactions**: Gentle hover effects and smooth transitions
+- **Encouraging Prompts**: Random gratitude prompts to inspire reflection
+- **Warm Accents**: Soft peach tones that feel inviting without being overwhelming
+- **Clean Calendar**: Simple, readable calendar with clear visual indicators
+- **Rounded Corners**: Soft 2xl-3xl border radius throughout for a friendly feel
+- **Minimal Shadows**: Light shadows that add depth without visual noise
 
 ## Tech Stack
 
@@ -19,8 +30,10 @@ A simple and elegant web application for tracking daily gratitude entries, built
 - In-memory storage (ready for PostgreSQL migration)
 
 **Frontend:**
-- React
-- Tailwind CSS
+- React (with Hooks)
+- Tailwind CSS (with custom configuration)
+- Google Fonts (Playfair Display & Inter)
+- Custom animations and transitions
 
 ## Project Structure
 

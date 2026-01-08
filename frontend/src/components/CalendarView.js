@@ -44,27 +44,34 @@ function CalendarView({ entries, onDateSelect }) {
 
   const monthName = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
+  const isToday = (dateString) => {
+    const today = new Date().toISOString().split('T')[0];
+    return dateString === today;
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="flex justify-between items-center mb-4">
+    <div className="card-warm p-8">
+      <div className="flex justify-between items-center mb-6">
         <button
           onClick={previousMonth}
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium transition duration-200"
+          className="btn-warm bg-white hover:bg-warm-50 border border-warm-200 text-gray-700 px-4 py-2"
         >
-          Previous
+          ← Previous
         </button>
-        <h2 className="text-2xl font-bold text-gray-800">{monthName}</h2>
+        <h2 className="text-2xl font-bold text-gray-800">
+          {monthName}
+        </h2>
         <button
           onClick={nextMonth}
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium transition duration-200"
+          className="btn-warm bg-white hover:bg-warm-50 border border-warm-200 text-gray-700 px-4 py-2"
         >
-          Next
+          Next →
         </button>
       </div>
 
       <div className="grid grid-cols-7 gap-2">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-          <div key={day} className="text-center font-semibold text-gray-600 py-2">
+          <div key={day} className="text-center font-medium text-gray-600 py-2 text-sm">
             {day}
           </div>
         ))}
@@ -72,17 +79,19 @@ function CalendarView({ entries, onDateSelect }) {
         {calendarDays.map((dayObj, index) => (
           <div
             key={index}
-            className={`aspect-square flex items-center justify-center rounded-lg ${
+            className={`aspect-square flex items-center justify-center rounded-xl transition-all ${
               dayObj
                 ? dayObj.hasEntry
-                  ? 'bg-green-100 border-2 border-green-500 cursor-pointer hover:bg-green-200'
-                  : 'bg-gray-50 border border-gray-200 cursor-pointer hover:bg-gray-100'
+                  ? 'bg-warm-200 border border-warm-300 cursor-pointer hover:bg-warm-300 font-medium text-warm-700'
+                  : isToday(dayObj.date)
+                  ? 'bg-warm-50 border-2 border-warm-300 cursor-pointer hover:bg-warm-100 font-medium text-gray-700'
+                  : 'bg-white border border-gray-200 cursor-pointer hover:bg-warm-50 text-gray-700'
                 : ''
-            } transition duration-200`}
+            }`}
             onClick={() => dayObj && onDateSelect && onDateSelect(dayObj.date)}
           >
             {dayObj && (
-              <span className={`text-lg ${dayObj.hasEntry ? 'font-bold text-green-800' : 'text-gray-700'}`}>
+              <span className="text-sm">
                 {dayObj.day}
               </span>
             )}
@@ -90,14 +99,14 @@ function CalendarView({ entries, onDateSelect }) {
         ))}
       </div>
 
-      <div className="mt-4 flex items-center justify-center space-x-4 text-sm">
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-green-100 border-2 border-green-500 rounded mr-2"></div>
-          <span className="text-gray-600">Has Entry</span>
+      <div className="mt-6 flex items-center justify-center gap-6 text-sm text-gray-600">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-warm-200 border border-warm-300 rounded"></div>
+          <span>Has entry</span>
         </div>
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-gray-50 border border-gray-200 rounded mr-2"></div>
-          <span className="text-gray-600">No Entry</span>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-warm-50 border-2 border-warm-300 rounded"></div>
+          <span>Today</span>
         </div>
       </div>
     </div>
