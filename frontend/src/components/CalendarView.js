@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 function CalendarView({ entries, onDateSelect }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState([]);
 
-  useEffect(() => {
-    generateCalendar();
-  }, [currentDate, entries]);
-
-  const generateCalendar = () => {
+  const generateCalendar = useCallback(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const firstDay = new Date(year, month, 1);
@@ -32,7 +28,11 @@ function CalendarView({ entries, onDateSelect }) {
     }
 
     setCalendarDays(days);
-  };
+  }, [currentDate, entries]);
+
+  useEffect(() => {
+    generateCalendar();
+  }, [generateCalendar]);
 
   const previousMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
